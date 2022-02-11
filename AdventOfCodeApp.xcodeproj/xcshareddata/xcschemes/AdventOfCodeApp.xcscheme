@@ -37,6 +37,14 @@
                BlueprintName = "AdventOfCodeAppTests"
                ReferencedContainer = "container:AdventOfCodeApp.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "AdventOfCodeAppTests">
+               </Test>
+               <Test
+                  Identifier = "Day_16">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "YES">
@@ -72,7 +80,7 @@
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"

@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Foundation
 @testable import AdventOfCodeApp
 
 extension Collection where Element == Set<Character> {
@@ -34,7 +35,6 @@ struct Point: Hashable {
 
 
 class AdventOfCodeAppTests: XCTestCase {
-
 
 
     func testDay8Part1() throws {
@@ -732,4 +732,160 @@ class AdventOfCodeAppTests: XCTestCase {
     print ("Dots count = \(points.count)")
     print("-----")
   }
+  
+  struct TemplateStep {
+    let condition: String
+    let insertion: String
+  }
+  
+  func apply(template: [String:Character], input:String) -> String {
+    var insertions: [(Int, Character)] = []
+    
+    for insertionPoint in 1..<(input.count) {
+      let start = input.index(input.startIndex,
+                              offsetBy: insertionPoint-1)
+      let end = input.index(input.startIndex,
+                            offsetBy: insertionPoint)
+      let key = String(input[start...end])
+      if let insertChar = template[key] {
+        insertions.append((insertionPoint, insertChar))
+      }
+    }
+    
+    var returnString = input
+    for insertion in insertions.reversed() {
+      let insertionPoint = insertion.0
+      let character = insertion.1
+      returnString.insert(character,
+                          at:returnString.index(returnString.startIndex,
+                            offsetBy: insertionPoint))
+    }
+    return returnString
+  }
+  
+  func countCharacters(string: String) -> [Character: Int] {
+    
+    var count: [Character: Int] = [:]
+    for c in string {
+      count[c, default: 0] += 1
+    }
+    return count
+  }
+  
+  func testDay14Part1() throws {
+    let inputLines = try linesFrom(file: "Day 14 TestInput")
+    let startString = inputLines[0]
+    let templateLines = inputLines[1..<inputLines.count]
+    
+    let templateSteps = Dictionary(uniqueKeysWithValues: templateLines.map { lineText -> (String, Character) in
+      let conditionRange = lineText[lineText.startIndex...].range(of: #"^\w+"#,
+                                  options: .regularExpression)!
+      let insertionRange = lineText[lineText.startIndex...].range(of: #"\w+$"#,
+                                          options: .regularExpression)!
+      let condition = String(lineText[conditionRange])
+      let insertChar = lineText[insertionRange.lowerBound]
+      
+      return (condition, insertChar)
+    })
+    
+    var afterStep:String = startString
+    for step in Range(1...40) {
+      let startTime = Date()
+      afterStep = apply(template: templateSteps, input: afterStep)
+      let timeElapsed = String(format: "%.2f", -startTime.timeIntervalSinceNow)
+//      print("string is now: \(afterStep)")
+
+      print("length after step \(step) is \(afterStep.count). Time was \(timeElapsed) sec")
+    }
+    
+    let theCount = countCharacters(string: afterStep)
+    let most = theCount.values.reduce(0) { max($0,$1) }
+    let least = theCount.values.reduce(most)  { min($0,$1) }
+    
+    print(">>> product \(most-least)")
+  }
+  
+  func testDay14Part2() throws {
+    let inputLines = try linesFrom(file: "Day 14 Input")
+    let startString = inputLines[0]
+    let templateLines = inputLines[1..<inputLines.count]
+    
+    // Make Template
+    let templateSteps = Dictionary(uniqueKeysWithValues: templateLines.map { lineText -> (String, Character) in
+      let conditionRange = lineText[lineText.startIndex...].range(of: #"^\w+"#,
+                                  options: .regularExpression)!
+      let insertionRange = lineText[lineText.startIndex...].range(of: #"\w+$"#,
+                                          options: .regularExpression)!
+      let condition = String(lineText[conditionRange])
+      let insertChar = lineText[insertionRange.lowerBound]
+      
+      return (condition, insertChar)
+    })
+    
+    
+    // Setup initial representation of string
+    var monomerCounts: [String:Int] = [:]
+    templateSteps.keys.forEach { monomerCounts[$0] = 0 }
+
+    
+    var startIndex = startString.startIndex
+    var endIndex = startString.index(after: startIndex)
+    while endIndex < startString.endIndex {
+      let monomer = startString[startIndex...endIndex]
+      monomerCounts[String(monomer)]! += 1
+      startIndex = endIndex
+      endIndex = startString.index(after: startIndex)
+    }
+    
+    // Setup overcount array
+    var overCounts: [Character:Int] = [:]
+    templateSteps.values.forEach { overCounts[$0] = 0 }
+    // Include overcounts in initial setup
+    
+    for char in startString[startString.index(after: startString.startIndex)..<startString.index(before:startString.endIndex)] {
+      overCounts[char]! += 1
+    }
+    
+    for step in Range(1...40) {
+      var nextMonomerCounts: [String:Int] = [:]
+      templateSteps.keys.forEach { nextMonomerCounts[$0] = 0 }
+      
+      monomerCounts.forEach { key,value in
+        let new = templateSteps[key]!
+        let monomer1 = "\(String(key[key.startIndex]))\(String(new))"
+        let monomer2 = "\(String(new))\(String(key[key.index(after: key.startIndex)]))"
+        
+        overCounts[new]! += value
+        nextMonomerCounts[monomer1]! += value
+        nextMonomerCounts[monomer2]! += value
+      }
+      
+      monomerCounts = nextMonomerCounts
+      
+      let monomerTotal = monomerCounts.values.reduce(0, +)
+      let overCountTotal = overCounts.values.reduce(0, +)
+      
+      let characterLength = monomerTotal - overCountTotal
+      print("length after step \(step) is \(characterLength)")
+    }
+    
+    var finalCounts: [Character:Int] = [:]
+    templateSteps.values.forEach { finalCounts[$0] = 0 }
+    
+    monomerCounts.forEach { monomer, count in
+      let headElement = monomer[monomer.startIndex]
+      let tailElement = monomer[monomer.index(after:monomer.startIndex)]
+      finalCounts[headElement]! += count
+      finalCounts[tailElement]! += count
+    }
+    
+    finalCounts.keys.forEach { finalCounts[$0]! -= overCounts[$0]! }
+    let most = Int(finalCounts.values.max()!)
+    let least = Int(finalCounts.values.min()!)
+    
+    print(">>> product \(most-least)")
+  }
+  
+  
+  
 }
