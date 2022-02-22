@@ -20,6 +20,7 @@
 		11D71C9327799A120018E3B5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D71C9227799A120018E3B5 /* ViewController.swift */; };
 		11D71C9827799A160018E3B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11D71C9727799A160018E3B5 /* Assets.xcassets */; };
 		11D71C9B27799A160018E3B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11D71C9927799A160018E3B5 /* Main.storyboard */; };
+		11D8CFA427BACFD1005CFF9E /* Day 16 Input.txt in Resources */ = {isa = PBXBuildFile; fileRef = 11D8CFA327BACFD1005CFF9E /* Day 16 Input.txt */; };
 		11D9B7E6277D980000F343C9 /* Day 9 TestInput.txt in Resources */ = {isa = PBXBuildFile; fileRef = 11D9B7E5277D980000F343C9 /* Day 9 TestInput.txt */; };
 		11D9B7E7277D9BB100F343C9 /* Day 9 TestInput.txt in Resources */ = {isa = PBXBuildFile; fileRef = 11D9B7E5277D980000F343C9 /* Day 9 TestInput.txt */; };
 		11D9B7E9277D9BDD00F343C9 /* Day 9 Input.txt in Resources */ = {isa = PBXBuildFile; fileRef = 11D9B7E8277D9BDD00F343C9 /* Day 9 Input.txt */; };
@@ -66,6 +67,7 @@
 		11D71C9A27799A160018E3B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		11D71C9C27799A160018E3B5 /* AdventOfCodeApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdventOfCodeApp.entitlements; sourceTree = "<group>"; };
 		11D71CA127799A160018E3B5 /* AdventOfCodeAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdventOfCodeAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		11D8CFA327BACFD1005CFF9E /* Day 16 Input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Day 16 Input.txt"; sourceTree = "<group>"; };
 		11D9B7E5277D980000F343C9 /* Day 9 TestInput.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Day 9 TestInput.txt"; sourceTree = "<group>"; };
 		11D9B7E8277D9BDD00F343C9 /* Day 9 Input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Day 9 Input.txt"; sourceTree = "<group>"; };
 		11D9B7EA277EDDF400F343C9 /* Day 10 TestInput.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Day 10 TestInput.txt"; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				11910A372783F9F300662F3E /* Day 14 Input.txt */,
 				11D04DAF278D683300D7EEEF /* Day 15 TestInput.txt */,
 				11D04DB1278D684F00D7EEEF /* Day 15 Input.txt */,
+				11D8CFA327BACFD1005CFF9E /* Day 16 Input.txt */,
 			);
 			path = AdventOfCodeApp;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				11910A362783F9E300662F3E /* Day 14 TestInput.txt in Resources */,
 				11D9B7E9277D9BDD00F343C9 /* Day 9 Input.txt in Resources */,
 				11D9B7E7277D9BB100F343C9 /* Day 9 TestInput.txt in Resources */,
+				11D8CFA427BACFD1005CFF9E /* Day 16 Input.txt in Resources */,
 				11D9B7EE277EE03D00F343C9 /* Day 10 Input.txt in Resources */,
 				11D9B7F0277EE93900F343C9 /* Day 11 TestInput.txt in Resources */,
 				11D9B7FE27828A5D00F343C9 /* Day 13 Input.txt in Resources */,
