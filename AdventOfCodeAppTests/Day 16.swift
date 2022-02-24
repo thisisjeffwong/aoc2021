@@ -20,6 +20,4 @@ class Day_16: XCTestCase {
                                     withExtension: "txt")
       let content = try String(contentsOf: fileURL!, encoding: String.Encoding.utf8).trimmingCharacters(in: .whitespacesAndNewlines)
     }
-
-
 }
